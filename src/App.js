@@ -5,6 +5,7 @@ import Home from "./Home";
 import SignIn from "./SignIn";
 import Select from "./Select";
 import Register from "./Register";
+import LeaveContactData from "./LeaveContactData";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
             <Route path='/select' exact={true} element={<Select goal="place"/>}/>
             <Route path='/price' exact={true} element={<Select goal="price"/>}/>
             <Route path='/register' exact={true} element={<Register/>}/>
+            <Route path='/leavecontacts' exact={true} element={<LeaveContactData/>}/>
+
         </Routes>
       </Router>
   );
