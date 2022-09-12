@@ -20,7 +20,7 @@ export default function AppNavbar() {
             </Nav>
             <Nav className="mr-auto" navbar>
                 <NavItem className="px-2">
-                    <NavbarText tag={Link} to="/">Регистрация</NavbarText>
+                    <NavbarText tag={Link} to="/register">Регистрация</NavbarText>
                 </NavItem>
                 <NavItem className="px-2">
                     <NavbarText tag={Link} to="/signin">Вход</NavbarText>
