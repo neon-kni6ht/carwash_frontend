@@ -2,20 +2,16 @@ import React, {Component} from 'react';
 import './App.css';
 import './index.css';
 import AppNavbar from "./AppNavBar";
-import Slider from "./Slider";
-import AdminNavbar from "./AdminNavBar";
+import SelectForm from "./SelectForm";
+import WashesToEdit from "./WashesToEdit";
 
 
-export default class Home extends Component {
-    render() {
+export default function AdministrationApp(props){
         return (
             <div style = {{height:"100vh", backgroundColor: "rgba(17,15,17,1.0)"}}>
-                <Slider/>
-                <AppNavbar/>
-                <AdminNavbar/>
+                <WashesToEdit/>
             </div>
 
         );
-    }
 }
 

@@ -6,6 +6,10 @@ import SignIn from "./SignIn";
 import Select from "./Select";
 import Register from "./Register";
 import LeaveContactData from "./LeaveContactData";
+import AdministrationApp from "./AdministrationApp";
+import Administration from "./Administration";
+import WashesToEdit from "./WashesToEdit";
+import WashToEdit from "./WashToEdit";
 
 function App() {
   return (
@@ -17,7 +21,8 @@ function App() {
             <Route path='/price' exact={true} element={<Select goal="price"/>}/>
             <Route path='/register' exact={true} element={<Register/>}/>
             <Route path='/leavecontacts' exact={true} element={<LeaveContactData/>}/>
-
+            <Route path='/admin' exact={true} element={<Administration/>}/>
+            <Route path='/edit' exact={true} element={<WashToEdit/>}/>
         </Routes>
       </Router>
   );
