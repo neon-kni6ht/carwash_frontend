@@ -10,6 +10,7 @@ import AdministrationApp from "./AdministrationApp";
 import Administration from "./Administration";
 import WashesToEdit from "./WashesToEdit";
 import WashToEdit from "./WashToEdit";
+import Reports from "./Reports";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path='/leavecontacts' exact={true} element={<LeaveContactData/>}/>
             <Route path='/admin' exact={true} element={<Administration/>}/>
             <Route path='/edit' exact={true} element={<WashToEdit/>}/>
+            <Route path='/reports' exact={true} element={<Reports/>}/>
         </Routes>
       </Router>
   );
