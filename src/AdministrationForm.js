@@ -29,8 +29,29 @@ export default class AdministrationForm extends Component{
             activeTab: '1'
         };
         this.getUsers();
+        this.getWashes();
 
     }
+
+    getWashes(){
+        let cookie = Cookies.get('access_token')
+        let token = JSON.parse(cookie).token
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `${token}`;
+
+        } else
+            delete axios.defaults.headers.common["Authorization"];
+
+        axios.get("http://localhost:8080/car-wash/all")
+            .then(response => {
+                //get token from response
+                console.log(response.data)
+                    this.setState({washes : response.data})
+            })
+            .catch(err => console.log(err))
+
+    };
+
 
     getUsers() {
         let cookie = Cookies.get('access_token')
@@ -41,12 +62,10 @@ export default class AdministrationForm extends Component{
         } else
             delete axios.defaults.headers.common["Authorization"];
 
-        let users;
 
         axios.get("http://localhost:8083/user-service/api/admin/getAllCarWashUsers")
             .then(response => {
                 //get token from response
-                console.log(response.data)
                 if (response.data.resultCode < 0)
                 {
                     alert(response.data.resultComment)
@@ -54,8 +73,6 @@ export default class AdministrationForm extends Component{
                 }
                 else
                     this.setState({users : response.data.carWashUserDtoList})
-                //redirect user to home page
-                //   window.location.href = '/'
             })
             .catch(err => console.log(err))
 
@@ -72,7 +89,6 @@ export default class AdministrationForm extends Component{
     }
 
     render() {
-        console.log(this.state.users)
 
         return (
             <div>
@@ -96,7 +112,7 @@ export default class AdministrationForm extends Component{
                     <TabPane tabId="1">
                         <Row>
                             <Col sm="12">
-                                <WashesToEdit/>
+                                <WashesToEdit washes={this.state.washes}/>
                             </Col>
                         </Row>
                     </TabPane>

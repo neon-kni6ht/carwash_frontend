@@ -4,7 +4,6 @@ import background from "./img/background1.jpg";
 import {Link} from "react-router-dom";
 
 
-
 const items = [
     {
         address: 'У нас широчайший ассортимент услуг, связанных с мойкой автомобилей',
@@ -28,7 +27,7 @@ const items = [
         name: 'Доступность'
     }
 ];
-export default class WashesToEdit extends Component{
+export default class WashesToEdit extends Component {
 
 
     constructor(props) {
@@ -36,23 +35,36 @@ export default class WashesToEdit extends Component{
 
     }
 
+    editUser(user){
+        localStorage.setItem('wash', JSON.stringify(user));
+        window.location.href = "/editwash"
+    }
+
+
 
     render() {
         let points;
 
-            points = items.map((item) => {
+        if (this.props.washes)
+            points = this.props.washes.map((item) => {
                 return (
                     <tr>
-                        <td >{item.name}</td>
-                        <td >{item.address}</td>
-                        <td >
-                            <a href="/editwash" style={{backgroundColor:"transparent"}}>
-                                <input className="btn btn-dark mr-1" type="button" value="Редактировать"/>
+                        <td>{item.id}</td>
+                        <td>{item.title}</td>
+                        <td>{item.address}</td>
+                        <td>{item.latitude}</td>
+                        <td>{item.longitude}</td>
+                        <td>{item.ownerId}</td>
+                        <td>{item.cityId}</td>
+
+                        <td>
+                            <a href="#" style={{backgroundColor: "transparent"}}>
+                                <input className="btn btn-dark mr-1" type="button" value="Редактировать" onClick={()=>this.editUser(item)}/>
                             </a>
-                            <a href="#" style={{backgroundColor:"transparent"}}>
+                            <a href="#" style={{backgroundColor: "transparent"}}>
                                 <input className="btn btn-dark mr-1" type="button" value="Удалить"/>
                             </a>
-                            <a href="#" style={{backgroundColor:"transparent"}}>
+                            <a href="#" style={{backgroundColor: "transparent"}}>
                                 <input className="btn btn-dark" type="button" value="Прайс"/>
                             </a>
                         </td>
@@ -66,11 +78,9 @@ export default class WashesToEdit extends Component{
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundImage: `url(${background}`,
-            height:"100%",
+            height: "100%",
 
         }}>
-
-
 
 
             <div
@@ -79,36 +89,44 @@ export default class WashesToEdit extends Component{
                     backgroundImage: `url(${mask}`,
                     backgroundRepeat: 'repeat',
                     width: "100%",
-                    height:"100%",
+                    height: "100%",
                     opacity: 0.9,
                 }}>
-                    <div className="d-flex text-white justify-content-center align-items-center" style={{width: "100%", height:"100%", verticalAlign:"middle", textAlign:"center"}}>
-                        <div className="p-5" style={{
-                            height: "auto",
-                            width: "100%",
-                            backgroundColor:"black",
-                            border: "1px solid white"
-                        }}>
-                            <form style={{textAlign:"initial"}}>
-                                <div>
-                                    <table className="table table-dark">
-                                        <tr>
-                                            <th>Наименование</th>
-                                            <th>Адрес</th>
-                                            <th></th>
-                                        </tr>
-                                        {points}
-                                    </table>
-                                </div>
-                            </form>
-                        </div>
+                <div className="d-flex text-white justify-content-center align-items-center"
+                     style={{width: "100%", height: "100%", verticalAlign: "middle", textAlign: "center"}}>
+                    <div className="p-5" style={{
+                        height: "auto",
+                        width: "100%",
+                        backgroundColor: "black",
+                        border: "1px solid white"
+                    }}>
+                        <form style={{textAlign: "initial"}}>
+                            <div>
+                                <table className="table table-dark w-100">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Наименование</th>
+                                        <th>Адрес</th>
+                                        <th>Широта</th>
+                                        <th>Долгота</th>
+                                        <th>ID Собственника</th>
+                                        <th>ID Города</th>
+                                        <th></th>
+                                    </tr>
+                                    {points}
+                                </table>
+                                <a href="/addwash">
+                                    <input className="btn btn-dark" type="button" value="Добавить"/>
+                                </a>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
 
 
     }
-
 
 
 }

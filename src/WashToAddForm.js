@@ -2,25 +2,48 @@ import React, {Component} from 'react';
 import mask from "./img/mask.jpg";
 import background from "./img/background1.jpg";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 
-export default class WashToEditForm extends Component{
+export default class WashToAddForm extends Component{
 
 
     constructor(props) {
         super(props);
-        let item = JSON.parse(localStorage.getItem("wash"));
 
         this.state = {
-            id: item.id,
-            title: item.title,
-            address: item.address,
-            latitude: item.latitude,
-            longitude: item.longitude,
-            ownerId: item.ownerId,
-            cityId: item.cityId
+            title: "",
+            address: "",
+            latitude: "",
+            longitude: "",
+            ownerId: "",
+            cityId: ""
+
         }
+
     }
+
+
+    handleSubmit() {
+
+        const payload = {
+            title: this.state.title,
+            address: this.state.address,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
+            ownerId: this.state.ownerId,
+            cityId: this.state.cityId
+        }
+
+        axios.post("http://localhost:8080/car-wash/create", payload)
+            .then(response => {
+                console.log(response.data)
+
+            })
+            .catch(err => console.log(err));
+
+    };
+
 
     render() {
 
@@ -49,41 +72,54 @@ export default class WashToEditForm extends Component{
                                 <div className="mb-3">
                                     <label>
                                         <p>Наименование</p>
-                                        <input type="text" value={this.state.title}/>
+                                        <input type="text" value={this.state.title} onChange={(e) => {
+                                            this.setState({title: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div className="mb-3">
                                     <label>
                                         <p>Адрес</p>
-                                        <input type="text" value={this.state.address}/>
+                                        <input type="text" value={this.state.address} onChange={(e) => {
+                                            this.setState({address: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div className="mb-3">
                                     <label>
                                         <p>Широта</p>
-                                        <input type="text" value={this.state.latitude}/>
+                                        <input type="text" value={this.state.latitude} onChange={(e) => {
+                                            this.setState({latitude: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div className="mb-3">
                                     <label>
                                         <p>Долгота</p>
-                                        <input type="text" value={this.state.longitude}/>
+                                        <input type="text" value={this.state.longitude} onChange={(e) => {
+                                            this.setState({longitude: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div className="mb-3">
                                     <label>
-                                        <p>ID Собственника</p>
-                                        <input type="text" value={this.state.ownerId}/>
+                                        <p>ID владельца</p>
+                                        <input type="text" value={this.state.ownerId} onChange={(e) => {
+                                            this.setState({ownerId: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div className="mb-3">
                                     <label>
-                                        <p>ID Города</p>
-                                        <input type="text" value={this.state.cityId}/>
+                                        <p>ID города</p>
+                                        <input type="text" value={this.state.cityId} onChange={(e) => {
+                                            this.setState({cityId: e.target.value})
+                                        }}/>
                                     </label>
                                 </div>
                                 <div>
-                                    <button className="btn btn-outline-light btn-lg" type="submit">Сохранить</button>
+                                    <input className="btn btn-outline-light btn-lg" type="button" onClick={() =>
+                                        this.handleSubmit()} value="Сохранить"/>
                                 </div>
                             </form>
                         </div>
@@ -91,6 +127,7 @@ export default class WashToEditForm extends Component{
                 </div>
             </div>
         </div>
+
 
 
     }

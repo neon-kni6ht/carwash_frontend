@@ -14,11 +14,9 @@ import { useCookies } from "react-cookie";
 import SignOut from "./SignOut";
 import IsAdmin from "./IsAdmin";
 import UserToEdit from "./UserToEdit";
+import WashToAdd from "./WashToAdd";
 
 function App() {
-
-   // const [cookies, setCookie] = useCookies(['user']);
-
 
     return (
         <Router>
@@ -38,6 +36,10 @@ function App() {
                 <Route path='/editwash' exact={true}
                        element={
                            <IsAdmin child={<WashToEdit/>}/>
+                       }/>
+                <Route path='/addwash' exact={true}
+                       element={
+                           <IsAdmin child={<WashToAdd/>}/>
                        }/>
                 <Route path='/edituser' exact={true}
                        element={
