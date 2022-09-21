@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import mask from "./img/mask.jpg";
-import background from "./img/background1.jpg";
 import {
     Col,
 

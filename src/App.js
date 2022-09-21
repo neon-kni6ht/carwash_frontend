@@ -13,6 +13,7 @@ import HasJWT from "./HasJWT";
 import { useCookies } from "react-cookie";
 import SignOut from "./SignOut";
 import IsAdmin from "./IsAdmin";
+import UserToEdit from "./UserToEdit";
 
 function App() {
 
@@ -34,9 +35,13 @@ function App() {
                        element={
                            <IsAdmin child={<Administration/>}/>
                        }/>
-                <Route path='/edit' exact={true}
+                <Route path='/editwash' exact={true}
                        element={
                            <IsAdmin child={<WashToEdit/>}/>
+                       }/>
+                <Route path='/edituser' exact={true}
+                       element={
+                           <IsAdmin child={<UserToEdit/>}/>
                        }/>
                 <Route path='/reports' exact={true}
                        element={

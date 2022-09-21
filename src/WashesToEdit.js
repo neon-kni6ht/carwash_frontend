@@ -46,13 +46,13 @@ export default class WashesToEdit extends Component{
                         <td >{item.name}</td>
                         <td >{item.address}</td>
                         <td >
-                            <a href="/edit" style={{backgroundColor:"transparent"}}>
+                            <a href="/editwash" style={{backgroundColor:"transparent"}}>
                                 <input className="btn btn-dark mr-1" type="button" value="Редактировать"/>
                             </a>
-                            <a href="/" style={{backgroundColor:"transparent"}}>
+                            <a href="#" style={{backgroundColor:"transparent"}}>
                                 <input className="btn btn-dark mr-1" type="button" value="Удалить"/>
                             </a>
-                            <a href="/" style={{backgroundColor:"transparent"}}>
+                            <a href="#" style={{backgroundColor:"transparent"}}>
                                 <input className="btn btn-dark" type="button" value="Прайс"/>
                             </a>
                         </td>
@@ -85,11 +85,10 @@ export default class WashesToEdit extends Component{
                     <div className="d-flex text-white justify-content-center align-items-center" style={{width: "100%", height:"100%", verticalAlign:"middle", textAlign:"center"}}>
                         <div className="p-5" style={{
                             height: "auto",
-                            width: "60%",
+                            width: "100%",
                             backgroundColor:"black",
                             border: "1px solid white"
                         }}>
-                            <h4 className="mb-5">Автомойки</h4>
                             <form style={{textAlign:"initial"}}>
                                 <div>
                                     <table className="table table-dark">

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import * as ReactDOM from 'react-dom';
 import Cookies from 'js-cookie'
 import mask from "./img/mask.jpg";
 import background from "./img/background1.jpg";
 import axios from 'axios';
+import {useNavigate} from "react-router";
 
-function handleSubmit(login, pass) {
-
-
+function HandleSubmit(login, pass) {
     const loginPayload = {
         login: login,
         password: pass
@@ -16,30 +16,23 @@ function handleSubmit(login, pass) {
         .then(response => {
             //get token from response
             let token = null;
-            if (response.data.resultCode=="200")
-            token = JSON.stringify(response.data.carWashUserDto);
+            console.log(response.data)
+            if (response.data.resultCode == "200") {
+                token = JSON.stringify(response.data.carWashUserDto);
 
-            //set JWT token to cookie
-            saveCookie(token)
 
-            //set token to axios common header
-            setAuthToken(token);
+                //set JWT token to cookie
+                saveCookie(token)
 
-            //redirect user to home page
-              window.location.href = '/'
+                window.location.href = '/'
+            }
+
         })
         .catch(err => console.log(err));
 
 
-
 };
 
-export const setAuthToken = token => {
-    if (token) {
-        axios.defaults.headers.common["Authorization"] = `${JSON.parse(token).token}`;
-    } else
-        delete axios.defaults.headers.common["Authorization"];
-}
 
 export function saveCookie(token) {
     if (token) {
@@ -110,7 +103,9 @@ export default class SignInForm extends Component {
                                 </div>
                                 <div>
                                     <button className="btn btn-outline-light btn-lg" type="button"
-                                            onClick={() => handleSubmit(this.state.login, this.state.password)}>Войти
+                                            onClick={() => {
+                                                HandleSubmit(this.state.login, this.state.password)
+                                            }}>Войти
                                     </button>
                                 </div>
                             </form>

@@ -12,7 +12,6 @@ export default class Home extends Component {
             <div style = {{height:"100vh", backgroundColor: "rgba(17,15,17,1.0)"}}>
                 <Slider/>
                 <AppNavbar/>
-                <AdminNavbar/>
             </div>
 
         );
