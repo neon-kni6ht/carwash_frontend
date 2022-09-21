@@ -2,16 +2,23 @@ import React, {Component} from 'react';
 import mask from "./img/mask.jpg";
 import background from "./img/background1.jpg";
 import {Link} from "react-router-dom";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 
 export default class UsersToEdit extends Component{
 
     constructor(props){
         super(props);
+
+    }
+
+    editUser(user){
+        localStorage.setItem('user', JSON.stringify(user));
+        window.location.href = "/edituser"
     }
 
     getRoles(roles){
-        console.log(roles)
         let userRoles = roles.map((role) => {
             return <div>
                 <span>{role.roleName}</span>
@@ -21,9 +28,32 @@ export default class UsersToEdit extends Component{
         return userRoles;
     }
 
+    removeUser(user) {
+
+        let cookie = Cookies.get('access_token')
+        let token = JSON.parse(cookie).token
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `${token}`;
+            //console.log(axios.defaults.headers.common)
+        } else
+            delete axios.defaults.headers.common["Authorization"];
+
+        axios.delete("http://localhost:8083/user-service/api/admin/deleteCarWashUserById/" + user.userId)
+            .then(response => {
+                console.log(response.data)
+                if (response.data.resultCode < 0)
+                    alert(response.data.resultComment)
+                else
+                    window.location.href = '/admin'
+            })
+            .catch(err => console.log(err));
+    }
+
     render() {
 
         let points;
+
+
 
         if (this.props.users)
         {points = this.props.users.map((item) => {
@@ -42,12 +72,12 @@ export default class UsersToEdit extends Component{
                     <td></td>
 
                     <td>
-                        <a href="/edituser" style={{backgroundColor: "transparent"}}>
+                        <Link to="#" style={{backgroundColor: "transparent"}} onClick={()=>this.editUser(item)}>
                             <input className="btn btn-dark mr-1" type="button" value="Редактировать"/>
-                        </a>
-                        <a href="/" style={{backgroundColor: "transparent"}}>
-                            <input className="btn btn-dark mr-1" type="button" value="Удалить"/>
-                        </a>
+                        </Link>
+                        <Link href="/" style={{backgroundColor: "transparent"}}>
+                            <input className="btn btn-dark mr-1" type="button" value="Удалить" onClick={()=>{this.removeUser(item)}}/>
+                        </Link>
                     </td>
                 </tr>
             );
@@ -108,5 +138,6 @@ export default class UsersToEdit extends Component{
 
 
     }
+
 
 }
