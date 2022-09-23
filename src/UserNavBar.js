@@ -36,7 +36,7 @@ export default function UserNavBar() {
                 <NavLink tag={Link} to="/about">Контакты</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} to="/">Мои заказы</NavLink>
+                <NavLink tag={Link} to="/userorders">Мои заказы</NavLink>
             </NavItem>
         </Nav>
         {authbar}
