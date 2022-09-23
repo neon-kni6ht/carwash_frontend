@@ -30,13 +30,10 @@ export default function UserNavBar() {
                 <NavLink tag={Link} to="/select">Запись</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} to="/price">Услуги</NavLink>
+                <NavLink as={"a"} href="http://localhost:8081/user/all-prices-read">Услуги</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink tag={Link} to="/">Контакты</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink tag={Link} to="/">Стать партнёром</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink tag={Link} to="/">Мои заказы</NavLink>

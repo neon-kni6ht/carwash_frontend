@@ -25,9 +25,7 @@ function App() {
                 <Route path='/' exact={true} element={<Home/>}/>
                 <Route path='/signin' exact={true} element={<SignIn/>}/>
                 <Route path='/select' exact={true}
-                       element={<Select goal="place"/>}/>
-                <Route path='/price' exact={true}
-                       element={<Select goal="price"/>}/>
+                       element={<Select/>}/>
                 <Route path='/register' exact={true} element={<Register/>}/>
                 <Route path='/leavecontacts' exact={true} element={<LeaveContactData/>}/>
                 <Route path='/admin' exact={true}
@@ -38,10 +36,10 @@ function App() {
                        element={
                            <IsAdmin child={<WashToEdit/>}/>
                        }/>
-                <Route path='/editwashprice' exact={true}
+{/*                <Route path='/editwashprice' exact={true}
                        element={
                            <IsAdmin child={<PriceToEdit/>}/>
-                       }/>
+                       }/>*/}
                 <Route path='/addwash' exact={true}
                        element={
                            <IsAdmin child={<WashToAdd/>}/>

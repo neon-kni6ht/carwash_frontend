@@ -11,6 +11,9 @@ export default function AdminNavbar() {
                 <NavItem>
                     <NavLink tag={Link} to="/reports">Отчёты</NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink as={"a"} href="http://localhost:8081/admin/all-prices">Прайс</NavLink>
+                </NavItem>
             </Nav>
 
 

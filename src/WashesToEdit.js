@@ -67,9 +67,9 @@ export default class WashesToEdit extends Component {
                             <a href="#" style={{backgroundColor: "transparent"}}>
                                 <input className="btn btn-dark mr-1" type="button" value="Удалить" onClick={()=>this.removeWash(item)}/>
                             </a>
-                            <a href="#" style={{backgroundColor: "transparent"}}>
+{/*                            <a href="#" style={{backgroundColor: "transparent"}}>
                                 <input className="btn btn-dark" type="button" value="Прайс" onClick={()=>this.getPrice(item)}/>
-                            </a>
+                            </a>*/}
                         </td>
                     </tr>
                 );
