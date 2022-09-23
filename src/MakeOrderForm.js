@@ -62,8 +62,8 @@ export default class MakeOrderForm extends Component {
             if (date && this.state.longitude && this.state.latitude)
                 axios.get("http://localhost:8080/car-wash/nearest-free-car-washes-by-date?latitude=" + this.state.latitude + "&longitude=" + this.state.longitude + "&date=" + date)
                     .then(response => {
-                        //get token from response
-                        console.log(response.data)
+
+                        //console.log(response.data)
                         this.setState({washes: response.data})
                     })
                     .catch(err => console.log(err))
@@ -94,7 +94,7 @@ export default class MakeOrderForm extends Component {
         if (this.state.date && this.state.selectedWash)
             axios.post("http://localhost:8080/order/create",payload)
                 .then(response => {
-                    console.log(response.data)
+                    //console.log(response.data)
                     window.location.href = "/"
 
                 })
@@ -169,7 +169,7 @@ export default class MakeOrderForm extends Component {
                                         {points}
                                     </table>
                                 </form>
-                                <input type="button" value="Записаться" onClick={()=>this.makeOrder()}/>
+                                <input className="btn btn-outline-light btn-lg" type="button" value="Записаться" onClick={()=>this.makeOrder()}/>
                             </div>
                         }
                     </div>

@@ -16,6 +16,7 @@ import IsAdmin from "./IsAdmin";
 import UserToEdit from "./UserToEdit";
 import WashToAdd from "./WashToAdd";
 import PriceToEdit from "./PriceToEdit";
+import About from "./About";
 
 function App() {
 
@@ -24,9 +25,9 @@ function App() {
             <Routes>
                 <Route path='/' exact={true} element={<Home/>}/>
                 <Route path='/signin' exact={true} element={<SignIn/>}/>
-                <Route path='/select' exact={true}
-                       element={<Select/>}/>
+                <Route path='/select' exact={true} element={<Select/>}/>
                 <Route path='/register' exact={true} element={<Register/>}/>
+                <Route path='/about' exact={true} element={<About/>}/>
                 <Route path='/leavecontacts' exact={true} element={<LeaveContactData/>}/>
                 <Route path='/admin' exact={true}
                        element={
