@@ -15,6 +15,7 @@ import SignOut from "./SignOut";
 import IsAdmin from "./IsAdmin";
 import UserToEdit from "./UserToEdit";
 import WashToAdd from "./WashToAdd";
+import PriceToEdit from "./PriceToEdit";
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
                 <Route path='/editwash' exact={true}
                        element={
                            <IsAdmin child={<WashToEdit/>}/>
+                       }/>
+                <Route path='/editwashprice' exact={true}
+                       element={
+                           <IsAdmin child={<PriceToEdit/>}/>
                        }/>
                 <Route path='/addwash' exact={true}
                        element={

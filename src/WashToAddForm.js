@@ -39,6 +39,7 @@ export default class WashToAddForm extends Component{
             .then(response => {
                 console.log(response.data)
 
+                window.location.href = '/admin'
             })
             .catch(err => console.log(err));
 

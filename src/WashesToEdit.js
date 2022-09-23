@@ -2,31 +2,10 @@ import React, {Component} from 'react';
 import mask from "./img/mask.jpg";
 import background from "./img/background1.jpg";
 import {Link} from "react-router-dom";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 
-const items = [
-    {
-        address: 'У нас широчайший ассортимент услуг, связанных с мойкой автомобилей',
-        name: 'Выбор'
-    },
-    {
-        address: 'Вы можете быть спокойны, ваш автомобиль вы отдаете в надежные руки',
-        name: 'Ответственный подход'
-    },
-    {
-        address: 'У нас работают профессионалы высокого класса',
-        name: 'Опыт'
-    },
-    {
-        address: 'На наших автомойках применяется только качественная автохимия и современное оборудование',
-        name: 'Качество'
-
-    },
-    {
-        address: 'Невысокие цены и большое количество точек гарантируют ваш комфорт',
-        name: 'Доступность'
-    }
-];
 export default class WashesToEdit extends Component {
 
 
@@ -35,12 +14,36 @@ export default class WashesToEdit extends Component {
 
     }
 
-    editUser(user){
-        localStorage.setItem('wash', JSON.stringify(user));
+    editWash(wash){
+        localStorage.setItem('wash', JSON.stringify(wash));
         window.location.href = "/editwash"
     }
 
+    removeWash(wash) {
 
+        let cookie = Cookies.get('access_token')
+        let token = JSON.parse(cookie).token
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `${token}`;
+            //console.log(axios.defaults.headers.common)
+        } else
+            delete axios.defaults.headers.common["Authorization"];
+
+        axios.delete("http://localhost:8080/car-wash/delete?id=" + wash.id)
+            .then(response => {
+                console.log(response.data)
+                if (response.data.resultCode < 0)
+                    alert(response.data.resultComment)
+                else
+                    window.location.href = '/admin'
+            })
+            .catch(err => console.log(err));
+    }
+
+    getPrice(wash) {
+        localStorage.setItem('wash', JSON.stringify(wash));
+        window.location.href = "/editwashprice"
+    }
 
     render() {
         let points;
@@ -59,13 +62,13 @@ export default class WashesToEdit extends Component {
 
                         <td>
                             <a href="#" style={{backgroundColor: "transparent"}}>
-                                <input className="btn btn-dark mr-1" type="button" value="Редактировать" onClick={()=>this.editUser(item)}/>
+                                <input className="btn btn-dark mr-1" type="button" value="Редактировать" onClick={()=>this.editWash(item)}/>
                             </a>
                             <a href="#" style={{backgroundColor: "transparent"}}>
-                                <input className="btn btn-dark mr-1" type="button" value="Удалить"/>
+                                <input className="btn btn-dark mr-1" type="button" value="Удалить" onClick={()=>this.removeWash(item)}/>
                             </a>
                             <a href="#" style={{backgroundColor: "transparent"}}>
-                                <input className="btn btn-dark" type="button" value="Прайс"/>
+                                <input className="btn btn-dark" type="button" value="Прайс" onClick={()=>this.getPrice(item)}/>
                             </a>
                         </td>
                     </tr>
