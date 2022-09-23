@@ -12,6 +12,8 @@ import {
 import classnames from "classnames";
 import SingleWashReport from "./SingleWashReport";
 import AllWashesReport from "./AllWashesReport";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 export default class ReportForm extends Component{
     constructor(props) {
@@ -21,6 +23,7 @@ export default class ReportForm extends Component{
         this.state = {
             activeTab: '1'
         };
+        this.getWashes();
     }
 
     toggle(tab) {
@@ -30,6 +33,19 @@ export default class ReportForm extends Component{
             });
         }
     }
+
+    getWashes(){
+
+        axios.get("http://localhost:8080/car-wash/all")
+            .then(response => {
+                //get token from response
+                console.log(response.data)
+                this.setState({washes : response.data})
+            })
+            .catch(err => console.log(err))
+
+    };
+
     render() {
 
         return (
@@ -50,7 +66,7 @@ export default class ReportForm extends Component{
                     <TabPane tabId="1">
                         <Row>
                             <Col sm="12">
-                                <SingleWashReport/>
+                                <SingleWashReport washes={this.state.washes}/>
                             </Col>
                         </Row>
                     </TabPane>

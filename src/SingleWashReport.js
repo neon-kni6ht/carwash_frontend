@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import mask from "./img/mask.jpg";
 import background from "./img/background1.jpg";
+import axios from "axios";
 
 const items = [
     {
@@ -30,18 +31,46 @@ const items = [
 
 export default class SingleWashReport extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            dateStart: "",
+            dateEnd: "",
+            washid: ""
+        };
+    }
+
+    getAllOrders(dstart, dend, wash){
+        let url = "http://localhost:8089/report/by-dates-by-car-wash?startDate=";
+
+        url = url + dstart + "&endDate=" + dend + "&id=" + wash;
+
+        axios.get(url)
+            .then(response => {
+                let repdata = response.data;
+
+
+                localStorage.setItem('repdata', JSON.stringify(repdata));
+                window.location.href = "/reportdata"
+            })
+            .catch(err => console.log(err));
+
+    }
 
     render() {
         let points;
 
-        points = items.map((item) => {
-            return (
-                <div className="form-check mb-3">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault"
-                           id="flexRadioDefault1"/><label>{item.address}</label>
-                </div>
-            );
-        });
+        if (this.props.washes)
+            points = this.props.washes.map((item) => {
+                return (
+                    <div className="form-check mb-3">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault"
+                           id="flexRadioDefault1" onClick={(e) => {
+                            this.setState({washid: item.id})
+                        }}/><label>{item.title} {item.address}</label>
+                    </div>
+                );
+            });
 
 
         return <div className="d-flex text-white justify-content-center align-items-center"
@@ -54,23 +83,28 @@ export default class SingleWashReport extends Component {
             }}>
                 <form style={{textAlign: "initial"}}>
                     <div>
-                        <h4 className="mb-3">Выберите интервал</h4>
+                        <h4 className="mb-3">Выберите период</h4>
                         <div className="mb-4">
                             <div className="mb-3">
-                                <label className="mb-2">Начало интервала</label>
-                                <input type="date" class="form-control"/>
+                                <label className="mb-2">Начало периода</label>
+                                <input type="date" className="form-control" value={this.state.dateStart} onChange={(e) => {
+                                    this.setState({dateStart: e.target.value})
+                                }}/>
                             </div>
                             <div className="mb-3">
-                                <label className="mb-2">Окончание интервала</label>
-                                <input type="date" class="form-control"/>
+                                <label className="mb-2">Окончание периода</label>
+                                <input type="date" className="form-control" value={this.state.dateEnd} onChange={(e) => {
+                                    this.setState({dateEnd: e.target.value})
+                                }}/>
                             </div>
                         </div>
                         <div className="mb-3">
                             <h4 className="mb-3">Выберите мойку</h4>
                             {points}
                         </div>
-                        <div className="d-flex text-white justify-content-center align-items-center">
-                            <input className="btn btn-dark" type="submit" value="Получить отчёт"/>
+                        <div className="d-flex text-white justify-content-center align-items-center" >
+                            <button className="btn btn-outline-light btn-lg" type="button" onClick={() =>
+                                this.getAllOrders(this.state.dateStart, this.state.dateEnd, this.state.washid)}>Сформировать отчёт</button>
                         </div>
                     </div>
                 </form>

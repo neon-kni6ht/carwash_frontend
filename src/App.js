@@ -15,6 +15,8 @@ import SignOut from "./SignOut";
 import IsAdmin from "./IsAdmin";
 import UserToEdit from "./UserToEdit";
 import WashToAdd from "./WashToAdd";
+import ReportData from "./ReportData";
+import UserOrders from "./UserOrders";
 
 function App() {
 
@@ -23,6 +25,9 @@ function App() {
             <Routes>
                 <Route path='/' exact={true} element={<Home/>}/>
                 <Route path='/signin' exact={true} element={<SignIn/>}/>
+                <Route path='/userorders' exact={true} element={
+                    <HasJWT child={<UserOrders/>}/>
+                }/>
                 <Route path='/select' exact={true}
                        element={<Select goal="place"/>}/>
                 <Route path='/price' exact={true}
@@ -48,6 +53,10 @@ function App() {
                 <Route path='/reports' exact={true}
                        element={
                            <IsAdmin child={<Reports/>}/>
+                       }/>
+                <Route path='/reportdata' exact={true}
+                       element={
+                           <IsAdmin child={<ReportData/>}/>
                        }/>
                 <Route path='/signout' exact={true} element={<SignOut/>}/>
                 <Route path='/forbidden' exact={true} element={<Home/>}/>
