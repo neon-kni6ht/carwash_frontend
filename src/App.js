@@ -17,6 +17,8 @@ import UserToEdit from "./UserToEdit";
 import WashToAdd from "./WashToAdd";
 import PriceToEdit from "./PriceToEdit";
 import About from "./About";
+import ReportData from "./ReportData";
+import UserOrders from "./UserOrders";
 
 function App() {
 
@@ -41,6 +43,13 @@ function App() {
                        element={
                            <IsAdmin child={<PriceToEdit/>}/>
                        }/>*/}
+                <Route path='/reportdata' exact={true}
+                       element={
+                           <IsAdmin child={<ReportData/>}/>
+                       }/>
+                <Route path='/userorders' exact={true} element={
+                    <HasJWT child={<UserOrders/>}/>
+                }/>
                 <Route path='/addwash' exact={true}
                        element={
                            <IsAdmin child={<WashToAdd/>}/>
